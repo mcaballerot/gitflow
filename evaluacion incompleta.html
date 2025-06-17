@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatitoZon - Tienda Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+
+        .page {
+            display: grid;
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+            grid-template-columns: 280px 1fr;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+            gap: 20px;
+            padding: 20px;
+        }
+
+
+        .header {
+            grid-area: header;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header__nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2196f3;
+        }
+
+        .header__cart {
+            background: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+        .sidebar {
+            grid-area: sidebar;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar__title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #2196f3;
+            padding-bottom: 8px;
+        }
+
+        .sidebar__filter {
+            margin-bottom: 20px;
+        }
+
+        .sidebar__filter-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .sidebar__option {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+
+        .sidebar__option input {
+            margin-right: 8px;
+        }
+
+
+        .main {
+            grid-area: main;
+        }
+
+        .footer {
+            grid-area: footer;
+            background: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .footer__content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer__link {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .footer__link:hover {
+            color: white;
+        }
+
+
+
+        .grid-cards {
+            display: grid;
+            grid: auto-flow 500px / repeat(auto-fit, minmax(300px, 1fr));
+            /* OTRA FORMA
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-auto-rows: 500px; */
+            gap: 20px;
+        }
+
+        .card {
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 0 15px 0 #ccc;
+        }
+
+        .card__body {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card__image {
+            height: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px 20px 0 0;
+            font-size: 3em;
+            background: #c7c7c7;
+            background: linear-gradient(50deg, #ffffff 0%, #c7c7c7 50%, #c7c7c7 100%);
+        }
+
+        .card__details {
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .card__details p {
+            color: #aaaaaa;
+        }
+
+        .badges {
+            display: flex;
+            gap: 5px;
+        }
+
+        .badge {
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: smaller;
+        }
+
+        .bg-green {
+            background: #01a001;
+        }
+
+        .bg-orange {
+            background: #ff4500;
+        }
+
+        .card__title,
+        .card__description,
+        .card__precio {
+            text-align: center;
+        }
+
+        .card__precio {
+            color: #2196f3;
+            font-weight: bold;
+            font-size: x-large;
+        }
+
+        .card__buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .button {
+            color: #000;
+            font-size: medium;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #eeeeee;
+        }
+
+        .button--blue {
+            background: #2196f3;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <header class="header">
+            <nav class="header__nav">
+                <div class="header__logo">🛒 PatitoZon</div>
+                <button class="header__cart">Carrito (1)</button>
+            </nav>
+        </header>
+
+
+        <aside class="sidebar">
+            <h2 class="sidebar__title">Filtros</h2>
+
+            <div class="sidebar__filter">
+                <div class="sidebar__filter-title">Categoría</div>
+                <label class="sidebar__option">
+                    <input type="checkbox" checked> Smartphones
+                </label>
+                <label class="sidebar__option">
+                    <input type="checkbox"> Laptops
+                </label>
+                <label class="sidebar__option">
+                    <input type="checkbox"> Tablets
+                </label>
+            </div>
+
+            <div class="sidebar__filter">
+                <div class="sidebar__filter-title">Precio</div>
+                <label class="sidebar__option">
+                    <input type="radio" name="price"> $0 - $500
+                </label>
+                <label class="sidebar__option">
+                    <input type="radio" name="price" checked> $500 - $1000
+                </label>
+                <label class="sidebar__option">
+                    <input type="radio" name="price"> $1000+
+                </label>
+            </div>
+        </aside>
+
+
+        <main class="main">
+            <div class="grid-cards">
+
+                <!-- xO 1 -->
+                <article class="card">
+                    <div class="card__body">
+                        <div class="card__image">📱</div>
+                        <div class="card__details">
+                            <div class="badges">
+                                <span class="badge bg-green">Nuevo</span>
+                                <span class="badge bg-orange">Oferta</span>
+                            </div>
+                            <h3 class="card__title">iPhone 15 Pro</h3>
+                            <p class="card__description">El iPhone más avanzado con chip A17 Pro y cámara profesional
+                            </p>
+                            <div class="card__precio">$999</div>
+                            <div class="card__buttons">
+                                <button class="button button--blue">Comprar</button>
+                                <button class="button q11">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="card">
+                    <div class="card__body">
+                        <div class="card__image">💻</div>
+                        <div class="card__details">
+                            <div class="badges">
+                                <span class="badge bg-orange">-20%</span>
+                            </div>
+                            <h3 class="card__title">MacBook Air M3</h3>
+                            <p class="card__description">Ultrabook potente y ligero para trabajo profesional</p>
+                            <div class="card__precio">$1,299</div>
+                            <div class="card__buttons">
+                                <button class="button button--blue">Comprar</button>
+                                <button class="button q11">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="card">
+                    <div class="card__body">
+                        <div class="card__image">⌚</div>
+                        <div class="card__details">
+                            <div class="badges">
+                                <span class="badge bg-green">Nuevo</span>
+                            </div>
+                            <h3 class="card__title">Apple Watch Series 9</h3>
+                            <p class="card__description">Smartwatch con monitoreo de salud avanzado</p>
+                            <div class="card__precio">$399</div>
+                            <div class="card__buttons">
+                                <button class="button button--blue">Comprar</button>
+                                <button class="button q11">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="card">
+                    <div class="card__body">
+                        <div class="card__image">🎧</div>
+                        <div class="card__details">
+                            <h3 class="card__title">AirPods Pro 2</h3>
+                            <p class="card__description">Auriculares con cancelación de ruido activa</p>
+                            <div class="card__precio">$249</div>
+                            <div class="card__buttons">
+                                <button class="button button--blue">Comprar</button>
+                                <button class="button q11">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="card">
+                    <div class="card__body">
+                        <div class="card__image">📺</div>
+                        <div class="card__details">
+                            <h3 class="card__title">iPad Pro 12.9"</h3>
+                            <p class="card__description">Tablet profesional con chip M2 y pantalla Liquid Retina XDR</p>
+                            <div class="card__precio">$1,099</div>
+                            <div class="card__buttons">
+                                <button class="button button--blue">Comprar</button>
+                                <button class="button q11">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="card">
+                    <div class="card__body">
+                        <div class="card__image">🖥️</div>
+                        <div class="card__details">
+                            <div class="badges">
+                                <span class="badge bg-orange">Oferta</span>
+                            </div>
+                            <h3 class="card__title">iMac 24"</h3>
+                            <p class="card__description">All-in-one con chip M3 y pantalla 4.5K</p>
+                            <div class="card__precio">$1,499</div>
+                            <div class="card__buttons">
+                                <button class="button button--blue">Comprar</button>
+                                <button class="button q11">♡</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+
+        <footer class="footer">
+            <div class="footer__content">
+                <a href="#" class="footer__link">Sobre Nosotros</a>
+                <a href="#" class="footer__link">Contacto</a>
+                <a href="#" class="footer__link">Términos</a>
+                <a href="#" class="footer__link">Privacidad</a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
